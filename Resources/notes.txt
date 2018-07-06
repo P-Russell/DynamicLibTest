@@ -1,0 +1,6 @@
+Compile SDL project with static lib
+	clang++ main.cpp -lSDL2 -ldl
+
+Compile SDL static lib (libSDL2.a) with wrapper into shared lib
+	clang++ -fPIC -shared SDLWrapper.cpp -lSDL2 -ldl -o SDL.so
+

@@ -1,0 +1,6 @@
+g++ -dynamiclib -flat_namespace myclass.cpp -o myclass.so
+g++ class_user.cpp -o class_user
+
+
+
+https://stackoverflow.com/questions/496664/c-dynamic-shared-library-on-linux

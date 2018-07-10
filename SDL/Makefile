@@ -1,2 +1,2 @@
 all:
-	clang++ -fPIC -shared SDLWrapper.cpp -lSDL2 -ldl -o SDL.so
+	clang++ -Wall -Werror -Wextra -std=c++11 -fPIC -shared Functions.cpp -lSDL2 -ldl -o SDL.so 

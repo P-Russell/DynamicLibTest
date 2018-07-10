@@ -3,14 +3,16 @@
 #include <cstdlib>
 #include <dlfcn.h>
 #include <iostream>
-#include "SDL/SDLWrapper.hpp"
-#include "GraphicsInterface.hpp"
+#include "IFunctions.hpp"
 
 void dlerror_wrapper(void)
 {
 	std::cerr << "Error: " << dlerror() << std::endl;
 	exit(EXIT_FAILURE);
 }
+
+
+
 
 int main(int argc, char **argv)
 {
@@ -20,21 +22,22 @@ int main(int argc, char **argv)
 	if (!handle)
 		dlerror();
 
-	GraphicsInterface* (*create)();
-	void (*destroy)(GraphicsInterface*);
+	IFunctions* (*create)();
+	void (*destroy)(IFunctions*);
 
 	int lib = 1;
 	
 
-	if (!(create = (GraphicsInterface* (*)())dlsym(handle, "create")))
+	if (!(create = (IFunctions* (*)())dlsym(handle, "create")))
 		dlerror_wrapper();
 	
-	if (!(destroy = (void (*)(GraphicsInterface*))dlsym(handle, "destroy")))
+	if (!(destroy = (void (*)(IFunctions*))dlsym(handle, "destroy")))
 		dlerror_wrapper();
 
-	GraphicsInterface* myClass = create();
-	myClass->initialize(640, 480);
-	int ret = myClass->loop();
+	IFunctions* myClass = create();
+
+	myClass->Initialise(600, 600);
+	myClass->Sleep(3000);
 
 	destroy(myClass);
 	dlclose(handle);

@@ -1,5 +1,5 @@
 all:
-	clang++ main.cpp -ldl
+	g++ main.cpp -ldl
 
 sdl:
 	@make -C SDL/
